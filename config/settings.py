@@ -103,9 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -118,3 +118,57 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOG_BASE_DIR = os.path.join(BASE_DIR, 'log')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    # ログフォーマット
+    'formatters': {
+        'develop': {
+            'format': '%(asctime)s, [%(levelname)s] %(pathname)s:%(lineno)d '
+                      '%(message)s'
+        },
+    },
+    # ハンドラ
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_BASE_DIR, 'django.log'),
+            'formatter': 'develop',
+            'maxBytes': 1024 * 1024 * 1024,
+            'backupCount': 2,
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'develop',
+        },
+    },
+    # ロガー
+    'loggers': {
+        # 自作アプリ全般のログを拾うロガー
+        '': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'nplusone': {
+            'handlers': ['file', 'console'],
+            'level': 'WARN',
+            'propagate': False,
+        },
+    }
+}
