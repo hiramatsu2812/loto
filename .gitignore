@@ -2,3 +2,5 @@ db.sqlite3
 venv/
 .idea/
 log/
+media/
+.env
