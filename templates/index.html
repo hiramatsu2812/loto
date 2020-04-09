@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}WebScraping{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h2 class="font-weight-normal">ホーム</h2>
+            </div>
+            <div class="card-body">
+                ようこそ {{ user.get_username }} さん
+                <h5><a href="{% url 'accounts:logout' %}">ログアウトする</a></h5>
+            </div>
+            <div class="card-footer text-muted text-center">
+                ImageScraping-WebSystem
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
