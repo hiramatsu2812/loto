@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'scraping',
     'accounts',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
